@@ -1,6 +1,6 @@
 
 # **fibonacci project**
-
+![project diagram](https://github.com/aakkiiff/fibonacci-project/blob/master/Project%20Diagram.jpg?raw=true)
 ## docker compose
 
 Just plug and play!
