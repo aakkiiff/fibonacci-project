@@ -86,3 +86,13 @@ for this***
  15. [x] ***or just give it admin privilliges if u dont want to be that much granular***
  16. u should be good to go now,just push the code to codecommit and see ur website live!
 
+# jenkins cicd
+
+ 1. have kubectl,docker,eksctl,awscli installed on jenkins server
+ 2. add github webhook to trigger jenkins build on commit
+ 3. use ngrok if using local machine [ngrok tutorial](https://youtu.be/adVWQc8T9qg)
+ 4. create eks cluster
+ 5. update eks context on jenkins server`aws configure on the server && server iam authorization eksctl create iamidentitymapping --cluster test001(clustername) --region=ap-south-1 --arn arn:aws:iam::137440810107:role/codebuild-test0-service-role --group system:masters --no-duplicate-arns`
+ 6. make a jenkins pipeline job and paste the jenkinsfile contents there.
+ 7. make a jenkins freestyle job which gets triggered on github push on master branch,and add to trigger pipeline job as post build action.
+ 8. you are good to go!

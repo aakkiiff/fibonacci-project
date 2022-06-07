@@ -1,0 +1,50 @@
+pipeline {
+    agent any 
+    environment {
+    bid = "${env.BUILD_NUMBER}"
+            }
+
+    stages {
+        stage('pull github sc') {
+             
+            steps {
+                git url: 'https://github.com/aakkiiff/fibonacci-project'
+            }
+        }
+        stage('docker build push') { 
+            steps {
+                bat 'docker login -u "akifboi" -p "password"' //this cmd is only for test perposes in windows 
+                //windows have issues getting password from env secrets linux machine dont have this bugs
+                //echo "$MY_PASSWORD" | docker login --username foo --password-stdin (use this cmd if using linux,good practice!)
+                bat 'docker build -t akifboi/jenkins-cicd-client:%bid% -t akifboi/jenkins-cicd-client:latest -f ./client/Dockerfile ./client'
+                bat 'docker build -t akifboi/jenkins-cicd-server:%bid% -t akifboi/jenkins-cicd-server:latest -f ./server/Dockerfile ./server'
+                bat 'docker build -t akifboi/jenkins-cicd-worker:%bid% -t akifboi/jenkins-cicd-worker:latest -f ./worker/Dockerfile ./worker'
+                echo "building images done"
+
+                echo "push images to dockerhub"
+                bat 'docker push akifboi/jenkins-cicd-client:%bid%'
+                bat 'docker push akifboi/jenkins-cicd-server:%bid%'
+                bat 'docker push akifboi/jenkins-cicd-worker:%bid%'
+
+                bat 'docker push akifboi/jenkins-cicd-client:latest'
+                bat 'docker push akifboi/jenkins-cicd-server:latest'
+                bat 'docker push akifboi/jenkins-cicd-worker:latest'
+                bat 'docker logout'
+            }
+        }
+        stage('update eks environment') {
+             
+            steps {
+                bat "kubectl get deploy"
+                bat "kubectl apply -f ./k8s"
+                bat "kubectl set image deployments/server-deployment server=akifboi/jenkins-cicd-server:%bid%"
+                bat "kubectl set image deployments/client-deployment client=akifboi/jenkins-cicd-client:%bid%"
+                bat "kubectl set image deployments/worker-deployment worker=akifboi/jenkins-cicd-worker:%bid%"
+
+                echo "hopefully everything will work ......see u soon"
+            }
+        }
+        
+    }
+
+}
