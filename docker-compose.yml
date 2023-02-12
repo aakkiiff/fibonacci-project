@@ -11,7 +11,7 @@ services:
   nginx:
     build:
       context: ./nginx
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     ports:
       - 3050:80
     restart: always
@@ -21,7 +21,7 @@ services:
   api:
     build:
       context: ./server
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     volumes:
       - /app/node_modules
       - ./server:/app
@@ -37,7 +37,7 @@ services:
   client:
     build:
       context: ./client
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     volumes:
       - /app/node_modules
       - ./client:/app
@@ -46,7 +46,7 @@ services:
 
   worker:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./worker
     volumes:
       - /app/node_modules
