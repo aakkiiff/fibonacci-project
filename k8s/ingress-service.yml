@@ -13,7 +13,7 @@
       rules:
         - http:
             paths:
-              - path: /?(.*)
+              - path: /
                 # UPDATE PATH
                 pathType: Prefix
                 # ADD PATHTYPE
@@ -23,7 +23,7 @@
                     name: client-cluster-ip-service
                     port:
                       number: 3000
-              - path: /api/?(.*)
+              - path: /api/
                 # UPDATE PATH
                 pathType: Prefix
                 # ADD PATHTYPE
