@@ -58,19 +58,6 @@ pipeline {
             }
         }
 
-        stage('update eks environment') {
-             
-            steps {
-                bat "kubectl get deploy"
-                bat "kubectl apply -f ./k8s"
-                bat "kubectl set image deployments/server-deployment server=akifboi/jenkins-cicd-server:%bid%"
-                bat "kubectl set image deployments/client-deployment client=akifboi/jenkins-cicd-client:%bid%"
-                bat "kubectl set image deployments/worker-deployment worker=akifboi/jenkins-cicd-worker:%bid%"
-
-                echo "hopefully everything will work ......see u soon"
-            }
-        }
-
         stage("TRIGGERING THE CONFIG PIPELINE"){
             steps{
                 build job: 'fibonacci_config', parameters: [string(name: 'IMAGE_TAG', value: env.IMAGE_TAG)]
