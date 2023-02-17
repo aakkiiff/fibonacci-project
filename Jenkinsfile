@@ -73,7 +73,7 @@ pipeline {
 
         stage("TRIGGERING THE CONFIG PIPELINE"){
             steps{
-                build job: 'currentweatherapp_config', parameters: [string(name: 'IMAGE_TAG', value: env.IMAGE_TAG)]
+                build job: 'fibonacci-project-config', parameters: [string(name: 'IMAGE_TAG', value: env.IMAGE_TAG)]
             }
         }
         
