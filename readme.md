@@ -60,6 +60,10 @@ your cluster will be up and running in 20mins
 
 ## step 5: installing ARGOCD, CD pipeline
 [argo cd get started](https://argo-cd.readthedocs.io/en/stable/getting_started/)
+
+# provisioning ebs dynamic volume
+1.[aws docs to install EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html)
+
 # covering later
 
 - domain setup
