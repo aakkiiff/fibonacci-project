@@ -75,15 +75,21 @@ your cluster will be up and running in 20mins
 	Use a different storage solution that is not tied to a specific AZ, such as Amazon Elastic File System (EFS). EFS volumes can be accessed by nodes in any AZ within the same region, allowing your pods to be scheduled on any node in any AZ. However, EFS may not be suitable for all workloads and may have higher latency compared to EBS.
 
 # covering later
-
-- domain setup
-
-- postgre persistent volume ebs set up
-
-- secrets maybe in secret manager?
-
-- tls encryption internal communication
-
-- farget?
-
-- research more what should be added next?
+  1. logging:
+  - fluentd -> cloudwatch ->elastic search -> kibana (monitor container logs)
+  - controlplane logging (one click eks console,aggregates to cloudwatch)
+  2. monitoring:
+  - metrics collected by prometheus -> grafana visualization (monitor metrics)
+  - cloudwatch container log insights to check container metrics,logs,fire lambda,alarm
+  3. scalling
+   - vpa
+   - hpa
+   - goldilocks
+   - cluster auto scaller
+   - kubecost
+  4. others:
+   - aws secrets manager for secrets
+   - ebs dynamic provision
+   - efs
+   - init containers
+   - domain setup?
