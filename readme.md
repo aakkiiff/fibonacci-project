@@ -17,7 +17,7 @@
 - Jenkins
 - Kubernetes
 - aws
-
+- Argo cd
 ## what this app does
 this app inputs the a number from the user,which is denoted as the index of fibonacci sequence,the worker calculates the fibonacci number of that index and pushes to redis,redis stores submitted number and calculated value,postgres only stores submitted number
   
@@ -25,7 +25,7 @@ this app inputs the a number from the user,which is denoted as the index of fibo
 ## Step 1: Setting Github repo
 2 repos.
 one is for the application code
-another one is for the Kubernetes manifest files
+another one is for the Kubernetes manifest files  [click here](https://github.com/aakkiiff/fibonacci-project-config)
  
 ## step 2: Setting Jenkins CI pipeline
 
@@ -63,6 +63,16 @@ your cluster will be up and running in 20mins
 
 # provisioning ebs dynamic volume
 1.[aws docs to install EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html)
+
+***caviates:***
+1. eks cluster had 2 nodes,but the postgre deployment(which is claiming pv using ebs driver) was scheduling only 1 node! why?
+
+	**FINDING:** EBS Vol. is created in a specific Availability Zone (AZ). If your EKS nodes are in different AZs, and the pods are requesting EBS volumes with a specific AZ specified, then the pods will only be scheduled on the node in the same AZ as the EBS volume.
+
+	**SOLUTION:**  
+	Deploy your EKS nodes in the same AZ as the EBS volumes that your pods are using. This ensures that your pods are always scheduled on a node that can access the EBS volumes.Wrong solution, if you need to deploy multiple nodes in multiple AZs to ensure high availability.
+
+	Use a different storage solution that is not tied to a specific AZ, such as Amazon Elastic File System (EFS). EFS volumes can be accessed by nodes in any AZ within the same region, allowing your pods to be scheduled on any node in any AZ. However, EFS may not be suitable for all workloads and may have higher latency compared to EBS.
 
 # covering later
 
