@@ -25,15 +25,31 @@ class Fib extends Component {
     });
   }
 
+  // handleSubmit = async (event) => {
+  //   event.preventDefault();
+
+  //   await axios.post('/api/values', {
+  //     index: this.state.index,
+  //   });
+  //   this.setState({ index: '' });
+  // };
   handleSubmit = async (event) => {
     event.preventDefault();
-
+  
+    const index = parseInt(this.state.index);
+  
+    if (isNaN(index) || index > 40) {
+      alert('Please enter a valid index value (less than or equal to 40)');
+      return;
+    }
+  
     await axios.post('/api/values', {
-      index: this.state.index,
+      index: index,
     });
+    
     this.setState({ index: '' });
   };
-
+  
   renderSeenIndexes() {
     return this.state.seenIndexes.map(({ number }) => number).join(', ');
   }
