@@ -73,6 +73,8 @@ your cluster will be up and running in 20mins
 	Deploy your EKS nodes in the same AZ as the EBS volumes that your pods are using. This ensures that your pods are always scheduled on a node that can access the EBS volumes.Wrong solution, if you need to deploy multiple nodes in multiple AZs to ensure high availability.
 
 	Use a different storage solution that is not tied to a specific AZ, such as Amazon Elastic File System (EFS). EFS volumes can be accessed by nodes in any AZ within the same region, allowing your pods to be scheduled on any node in any AZ. However, EFS may not be suitable for all workloads and may have higher latency compared to EBS.
+# provisioning efs dynamic volume  
+[aws efs eks demo](https://docs.aws.amazon.com/eks/latest/userguide/efs-csi.html)
 
 # covering later
   1. logging:
