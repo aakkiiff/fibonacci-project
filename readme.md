@@ -141,7 +141,13 @@ Use a different storage solution that is not tied to a specific AZ, such as Amaz
 we can mount postgres password and other sensitive data in aws secrets manager.
 [step by step guide](https://www.linkedin.com/pulse/mounting-aws-secrets-eks-pods-mohammad-akif)
 
-  
+# Scalling
+scale the cluster with Vertical Pod Autoscalling(VPA) and Cluster Autoscalling(CA)
+[click here](https://www.linkedin.com/pulse/scale-eks-cluster-autoscaling-horizontal-pod-mohammad-akif)
+
+# resource optimization
+optimize resource allocation with goldilocks
+[click here](https://www.linkedin.com/pulse/optimizing-resource-allocation-kubernetes-goldilocks-mohammad-akif)
 
 # covering later
 
@@ -157,17 +163,7 @@ we can mount postgres password and other sensitive data in aws secrets manager.
 
 - cloudwatch container log insights to check container metrics,logs,fire lambda,alarm
 
-3. scalling
-
-- vpa
-
-- hpa
-
-- goldilocks
-
-- cluster auto scaller
-
 - kubecost
-4. others:
+3. others:
 - init containers
 - domain setup?
