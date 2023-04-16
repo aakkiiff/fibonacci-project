@@ -145,6 +145,11 @@ we can mount postgres password and other sensitive data in aws secrets manager.
 scale the cluster with Vertical Pod Autoscalling(VPA) and Cluster Autoscalling(CA)
 [click here](https://www.linkedin.com/pulse/scale-eks-cluster-autoscaling-horizontal-pod-mohammad-akif)
 
+#Monitoring
+Visualize EKS Cluster metrics With Prometheus And Grafana
+[click here](https://www.linkedin.com/pulse/visualizing-eks-cluster-metrics-prometheus-grafana-mohammad-akif)
+
+
 # resource optimization
 optimize resource allocation with goldilocks
 [click here](https://www.linkedin.com/pulse/optimizing-resource-allocation-kubernetes-goldilocks-mohammad-akif)
